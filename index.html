@@ -3,132 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Maham ❤️</title>
+    <title>maham.exe</title>
     <style>
-        /* This section styles the page to look cute */
+        /* MINIMALIST GEN Z AESTHETIC */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fce4ec; /* Light pink background */
+            background-color: #ffffff;
+            font-family: 'Courier New', Courier, monospace; /* The "hacker/cool" font */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Prevents scrollbars when button moves */
-            text-align: center;
+            overflow: hidden;
+            color: #000000;
         }
 
         .container {
-            position: relative;
+            text-align: center;
+            border: 2px solid black;
+            padding: 40px;
+            box-shadow: 10px 10px 0px #000000; /* Hard shadow for brutalist look */
+            max-width: 400px;
+            background: white;
+            z-index: 10;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border: 2px solid black;
+            margin-bottom: 20px;
+            filter: grayscale(100%); /* Makes it look edgier */
         }
 
         h1 {
-            color: #d81b60; /* Deep pink text */
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px #f8bbd0;
-        }
-
-        .gif-container img {
-            width: 250px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            padding: 15px 30px;
             font-size: 1.5rem;
-            border: none;
-            border-radius: 50px;
+            text-transform: lowercase;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative; /* Needed for the No button to move */
+        }
+
+        button {
+            font-family: 'Courier New', Courier, monospace;
+            background: white;
+            color: black;
+            border: 2px solid black;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            margin: 10px;
-            transition: all 0.3s ease;
+            box-shadow: 4px 4px 0px #000000;
+            transition: all 0.1s;
+            text-transform: lowercase;
         }
 
-        #yesBtn {
-            background-color: #4CAF50; /* Green */
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 5px #2E7D32;
+        button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000000;
         }
 
-        #yesBtn:active {
-            box-shadow: 0 2px #2E7D32;
-            transform: translateY(4px);
-        }
-
+        /* The running button needs absolute positioning when it starts moving */
         #noBtn {
-            background-color: #ef5350; /* Red */
-            color: white;
-            font-weight: bold;
-            position: absolute; /* Allows us to move it freely */
-            box-shadow: 0 5px #c62828;
+            position: relative; 
         }
 
-        /* Responsive text for mobile phones */
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .gif-container img { width: 200px; }
+        /* Loading bar animation style */
+        .loading-bar {
+            width: 100%;
+            height: 20px;
+            border: 2px solid black;
+            margin-top: 20px;
+            display: none;
+            position: relative;
         }
+
+        .fill {
+            height: 100%;
+            background-color: black;
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+
+        .status-text {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="gif-container" id="gifContainer">
-            <img src="https://media.tenor.com/K2sE98R7a-0AAAAi/mocha-bear-hearts.gif" alt="Cute Bear">
+    <div class="container" id="mainCard">
+        <img id="memeImg" src="https://media.tenor.com/2s_01a30FAGAAAAd/cat-standing.gif" alt="standing cat">
+        
+        <h1 id="mainText">yo maham. be my valentine?</h1>
+
+        <div class="btn-group">
+            <button id="yesBtn">yes (based)</button>
+            <button id="noBtn">no (cringe)</button>
         </div>
 
-        <h1 id="question">Maham, will you be my Valentine? 🌹</h1>
-
-        <div class="buttons">
-            <button class="btn" id="yesBtn">YES! ❤️</button>
-            <button class="btn" id="noBtn">No 😢</button>
+        <div class="loading-bar" id="loadingBar">
+            <div class="fill" id="fillBar"></div>
         </div>
+        <p class="status-text" id="statusText"></p>
     </div>
 
     <script>
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const question = document.getElementById('question');
-        const gifContainer = document.getElementById('gifContainer');
+        const mainText = document.getElementById('mainText');
+        const memeImg = document.getElementById('memeImg');
+        const loadingBar = document.getElementById('loadingBar');
+        const fillBar = document.getElementById('fillBar');
+        const statusText = document.getElementById('statusText');
+        const btnGroup = document.querySelector('.btn-group');
 
-        // Logic to make the "No" button run away
-        noBtn.addEventListener('mouseover', () => {
+        // 1. The "No" Button Logic (Runaway)
+        const moveButton = () => {
             const containerHeight = window.innerHeight;
             const containerWidth = window.innerWidth;
             
-            // Calculate random positions
-            const randomX = Math.floor(Math.random() * (containerWidth - 100));
-            const randomY = Math.floor(Math.random() * (containerHeight - 100));
+            // Get random positions
+            const randomX = Math.random() * (containerWidth - 100);
+            const randomY = Math.random() * (containerHeight - 50);
 
+            // Apply fixed positioning to break it out of the layout
+            noBtn.style.position = 'fixed';
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
-        });
+        };
 
-        // Also add click event for mobile users (tapping tries to run away)
-        noBtn.addEventListener('click', () => {
-             const containerHeight = window.innerHeight;
-            const containerWidth = window.innerWidth;
-            const randomX = Math.floor(Math.random() * (containerWidth - 100));
-            const randomY = Math.floor(Math.random() * (containerHeight - 100));
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-        })
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('click', moveButton); // For mobile taps
 
-        // Logic for when she clicks "Yes"
+        // 2. The "Yes" Button Logic (Email Simulation)
         yesBtn.addEventListener('click', () => {
-            // Change the text
-            question.innerHTML = "YAY! I love you Maham! 💖";
+            // Hide buttons
+            btnGroup.style.display = 'none';
             
-            // Change the GIF to a kissing/happy one
-            gifContainer.innerHTML = '<img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Bear Kiss">';
-            
-            // Hide the buttons
-            yesBtn.style.display = 'none';
-            noBtn.style.display = 'none';
-        });
-    </script>
+            // Change text and image
+            mainText.innerText = "wait... processing decision...";
+            memeImg.src = "https://media.tenor.com/D_2w7jGg4aEAAAAd/cat-typing.gif"; // Hacker cat gif
 
-</body>
-</html>
+            // Show loading bar
+            loadingBar.style.display = 'block';
+            statusText.style.display = 'block';
+            statusText.innerText = "connecting to server...";
+
+            // Simulate the "Sending Email
