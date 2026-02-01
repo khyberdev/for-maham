@@ -3,161 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>maham.exe</title>
+    <title>For Maham ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* MINIMALIST GEN Z AESTHETIC */
         body {
-            background-color: #ffffff;
-            font-family: 'Courier New', Courier, monospace; /* The "hacker/cool" font */
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF3E0; 
+            background-image: radial-gradient(#FFB74D 1px, transparent 1px);
+            background-size: 20px 20px;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
-            color: #000000;
+            text-align: center;
         }
 
         .container {
-            text-align: center;
-            border: 2px solid black;
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
             padding: 40px;
-            box-shadow: 10px 10px 0px #000000; /* Hard shadow for brutalist look */
-            max-width: 400px;
-            background: white;
-            z-index: 10;
-        }
-
-        img {
-            width: 100%;
-            height: auto;
-            border: 2px solid black;
-            margin-bottom: 20px;
-            filter: grayscale(100%); /* Makes it look edgier */
+            border-radius: 20px;
+            border: 5px solid #E91E63; 
+            box-shadow: 10px 10px 0px #FFC107; 
+            max-width: 90%;
         }
 
         h1 {
-            font-size: 1.5rem;
-            text-transform: lowercase;
-            margin-bottom: 30px;
-            font-weight: bold;
+            color: #D81B60; 
+            font-family: 'Fredoka One', cursive; 
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .janaana {
+            color: #009688; 
+            text-decoration: underline;
+            text-decoration-style: wavy;
         }
 
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            position: relative; /* Needed for the No button to move */
+        .gif-container img {
+            width: 250px;
+            border-radius: 15px;
+            border: 3px solid #000;
+            margin-bottom: 20px;
         }
 
-        button {
-            font-family: 'Courier New', Courier, monospace;
-            background: white;
-            color: black;
-            border: 2px solid black;
-            padding: 10px 20px;
-            font-size: 1rem;
-            font-weight: bold;
+        .btn {
+            padding: 15px 35px;
+            font-size: 1.3rem;
+            border: 3px solid #000;
+            border-radius: 50px;
             cursor: pointer;
-            box-shadow: 4px 4px 0px #000000;
-            transition: all 0.1s;
-            text-transform: lowercase;
+            margin: 10px;
+            font-family: 'Fredoka One', cursive;
+            transition: transform 0.1s;
         }
 
-        button:active {
+        #yesBtn {
+            background-color: #00E676; 
+            color: black;
+            box-shadow: 4px 4px 0px #000;
+        }
+
+        #yesBtn:active {
             transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0px #000000;
+            box-shadow: 2px 2px 0px #000;
         }
 
-        /* The running button needs absolute positioning when it starts moving */
         #noBtn {
-            position: relative; 
+            background-color: #FF5252; 
+            color: white;
+            position: absolute; 
+            box-shadow: 4px 4px 0px #000;
+            /* Ensure it doesn't overlap initially */
+            top: auto; 
+            left: auto;
         }
 
-        /* Loading bar animation style */
-        .loading-bar {
-            width: 100%;
-            height: 20px;
-            border: 2px solid black;
-            margin-top: 20px;
-            display: none;
-            position: relative;
+        /* Music Button Style */
+        #musicBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #673AB7; /* Deep Purple */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 2px solid #000;
+            font-family: 'Fredoka One', cursive;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 3px 3px 0px #000;
         }
 
-        .fill {
-            height: 100%;
-            background-color: black;
-            width: 0%;
-            transition: width 2s ease-in-out;
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .gif-container img { width: 100%; }
+            .btn { padding: 10px 20px; font-size: 1rem; }
+            #musicBtn { padding: 8px 15px; font-size: 0.9rem; }
         }
-
-        .status-text {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            display: none;
-        }
-
     </style>
 </head>
 <body>
 
-    <div class="container" id="mainCard">
-        <img id="memeImg" src="https://media.tenor.com/2s_01a30FAGAAAAd/cat-standing.gif" alt="standing cat">
-        
-        <h1 id="mainText">yo maham. be my valentine?</h1>
+    <audio id="bgMusic" loop>
+        <source src="song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-        <div class="btn-group">
-            <button id="yesBtn">yes (based)</button>
-            <button id="noBtn">no (cringe)</button>
+    <button id="musicBtn">Play music 🎵</button>
+
+    <div class="container">
+        <div class="gif-container" id="gifContainer">
+            <img src="https://media.tenor.com/P4b4-aM5j2QAAAAi/mocha-bear-hearts.gif" alt="Cute Bear">
         </div>
 
-        <div class="loading-bar" id="loadingBar">
-            <div class="fill" id="fillBar"></div>
+        <h1 id="question">Yo Maham will you be my Valentine <span class="janaana">janaana</span> ?</h1>
+
+        <div class="buttons">
+            <button class="btn" id="yesBtn">AO AOOOO !</button>
+            <button class="btn" id="noBtn">Na mara 🥱</button>
         </div>
-        <p class="status-text" id="statusText"></p>
     </div>
 
     <script>
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const mainText = document.getElementById('mainText');
-        const memeImg = document.getElementById('memeImg');
-        const loadingBar = document.getElementById('loadingBar');
-        const fillBar = document.getElementById('fillBar');
-        const statusText = document.getElementById('statusText');
-        const btnGroup = document.querySelector('.btn-group');
+        const question = document.getElementById('question');
+        const gifContainer = document.getElementById('gifContainer');
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
 
-        // 1. The "No" Button Logic (Runaway)
-        const moveButton = () => {
+        // Music Button Logic
+        let isPlaying = false;
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.innerText = "Play music 🎵";
+                isPlaying = false;
+            } else {
+                bgMusic.play();
+                musicBtn.innerText = "Pause Music ⏸️";
+                isPlaying = true;
+            }
+        });
+
+        // Run Away Logic
+        function moveButton() {
             const containerHeight = window.innerHeight;
             const containerWidth = window.innerWidth;
             
-            // Get random positions
-            const randomX = Math.random() * (containerWidth - 100);
-            const randomY = Math.random() * (containerHeight - 50);
+            const randomX = Math.floor(Math.random() * (containerWidth - 150));
+            const randomY = Math.floor(Math.random() * (containerHeight - 150));
 
-            // Apply fixed positioning to break it out of the layout
-            noBtn.style.position = 'fixed';
+            noBtn.style.position = 'fixed'; 
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
-        };
+        }
 
         noBtn.addEventListener('mouseover', moveButton);
-        noBtn.addEventListener('click', moveButton); // For mobile taps
+        noBtn.addEventListener('click', moveButton);
 
-        // 2. The "Yes" Button Logic (Email Simulation)
+        // Success Logic
         yesBtn.addEventListener('click', () => {
-            // Hide buttons
-            btnGroup.style.display = 'none';
+            question.innerHTML = "Manana Janaana! <br> I knew it! ❤️😎";
+            gifContainer.innerHTML = '<img src="https://media.tenor.com/On7r9JjQZTUAAAAi/cute-love.gif" alt="Happy Dance">';
+            yesBtn.style.display = 'none';
+            noBtn.style.display = 'none';
             
-            // Change text and image
-            mainText.innerText = "wait... processing decision...";
-            memeImg.src = "https://media.tenor.com/D_2w7jGg4aEAAAAd/cat-typing.gif"; // Hacker cat gif
+            // Optional: Start music automatically if she clicks YES and hadn't started it yet
+            if (!isPlaying) {
+                bgMusic.play();
+                musicBtn.innerText = "Pause Music ⏸️";
+                isPlaying = true;
+            }
+        });
+    </script>
 
-            // Show loading bar
-            loadingBar.style.display = 'block';
-            statusText.style.display = 'block';
-            statusText.innerText = "connecting to server...";
-
-            // Simulate the "Sending Email
+</body>
+</html>
